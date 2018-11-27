@@ -1,0 +1,29 @@
+{
+  "name": "chrisk-movie-crud-front-end",
+  "version": "1.0.0",
+  "description": "Front end for movie-crud website project",
+  "main": "index.js",
+  "scripts": {
+    "test": "live-server  --ignore=./node_modules",
+    "watch": "watchify -d scripts/app.js -o bundle.js",
+    "dev": "run-all \"npm run watch\" \"npm run test\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chriskistner/chrisk-movie-crud-front-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chriskistner/chrisk-movie-crud-front-end/issues"
+  },
+  "homepage": "https://github.com/chriskistner/chrisk-movie-crud-front-end#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "watchify": "^3.11.0"
+  }
+}
