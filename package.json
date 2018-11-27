@@ -6,6 +6,7 @@
   "scripts": {
     "test": "live-server  --ignore=./node_modules",
     "watch": "watchify -d scripts/app.js -o bundle.js",
+    "build": "browserify scripts/main.js -o bundle.js",
     "dev": "run-all \"npm run watch\" \"npm run test\""
   },
   "repository": {
@@ -20,7 +21,8 @@
   },
   "homepage": "https://github.com/chriskistner/chrisk-movie-crud-front-end#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "browserify": "^16.2.3"
   },
   "devDependencies": {
     "live-server": "^1.2.1",
