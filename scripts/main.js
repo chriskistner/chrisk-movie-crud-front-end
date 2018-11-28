@@ -12,10 +12,13 @@ function getMovies() { axios.get(apiURLMovies)
 getMovies();
 
 function populatePage(arr){
-    const appliedTemplates = arr.map(film => create.movieRow(film.id, film.title, film.released, film.director, film.rating, film.poster)).join('\n');
+    const appliedTemplates = arr.map(film => create.movieRow(film.id, film.title, film.released, film.director, film.rating, film.poster, film.actors)).join('\n');
     document.querySelector(".main-body").innerHTML = appliedTemplates;
 
     for (let film of arr){
+        const appliedLists = film.actors.map(actor => create.createActorList(actor.first_name, actor.last_name)).join('\n');
+        document.querySelector(`#actor-list[data-id="${film.id}"]`).innerHTML = appliedLists;
+        console.log(appliedLists);
         let deleteBlogButton = document.querySelector(`#delete-film[data-id="${film.id}"]`);
         let updateBlogButton = document.querySelector(`#edit-film[data-id="${film.id}"]`);
         let closeUpdateButton = document.querySelector(`#stop-post[data-id="${film.id}"]`);

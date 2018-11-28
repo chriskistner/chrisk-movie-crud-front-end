@@ -1,4 +1,4 @@
-const movieRow =(id, title, released, director, rating, poster,) => {
+const movieRow =(id, title, released, director, rating, poster, actors) => {
     return `
     <div class="row border">
         <div class="col-2 border">
@@ -6,12 +6,12 @@ const movieRow =(id, title, released, director, rating, poster,) => {
         </div>
         <div class="col-2">
             <p style="margin-bottom: 0px;">Title: ${title}</p>
-        </div>
-        <div class="col-2">
             <p style="margin-bottom: 0px;">Released: ${released}</p>
+            
         </div>
+
         <div class="col-2">
-            <p style="margin-bottom: 0px;">Director: ${director}</p>
+            <p style="margin-bottom: 0px;">Actors:<ul id="actor-list" data-id=${id}> </ul></p>
         </div>
         <div class="col-2">
             <p style="margin-bottom: 0px;">Rating: ${rating}</p>
@@ -38,6 +38,12 @@ const movieRow =(id, title, released, director, rating, poster,) => {
     </div>
     `
 };
+
+const createActorList = (fName, lName) => {
+    return `
+    <li>${fName} ${lName}</li>
+    `
+}
 
 const newMovie = () => {
     return `
@@ -78,5 +84,6 @@ const newMovie = () => {
 
 module.exports = {
     movieRow,
-    newMovie
+    newMovie,
+    createActorList
 }

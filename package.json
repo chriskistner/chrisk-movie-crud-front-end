@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "live-server  --ignore=./node_modules",
-    "watch": "watchify -d scripts/app.js -o bundle.js",
+    "watch": "watchify -d scripts/main.js -o bundle.js",
     "build": "browserify scripts/main.js -o bundle.js",
     "dev": "run-all \"npm run watch\" \"npm run test\""
   },
