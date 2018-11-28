@@ -4,7 +4,7 @@
   "description": "Front end for movie-crud website project",
   "main": "index.js",
   "scripts": {
-    "test": "live-server  --ignore=./node_modules",
+    "test": "live-server  --watch=./bundle.js,index.html",
     "watch": "watchify -d scripts/main.js -o bundle.js",
     "build": "browserify scripts/main.js -o bundle.js",
     "dev": "run-all \"npm run watch\" \"npm run test\""
