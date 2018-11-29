@@ -138,8 +138,8 @@ const displayNewMovie = (title, poster, released, director, rating) => {
             </div>
             <div class="row justify-content-center">
                 <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-sm">All Movies</button>
-                <button type="button" class="btn btn-success btn-sm">Add Another</button>
+                <a href="./index.html"><button type="button" class="btn btn-primary btn-sm">All Movies</button></a>
+                <a href="./add-movie.html"><button type="button" class="btn btn-success btn-sm">Add Another</button></a>
           </div>
             </div>
         </div
