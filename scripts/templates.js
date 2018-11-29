@@ -4,36 +4,39 @@ const movieRow =(id, title, released, director, rating, poster) => {
         <div class="col-2 border-top border-left border-bottom">
             <img src="${poster}" height="200px">
         </div>
+
         <div class="col-2 border-top border-bottom">
             <p style="margin-bottom: 0px;">Site ID: ${id}</p>
             <p style="margin-bottom: 0px;">Title: ${title}</p>
             <p style="margin-bottom: 0px;">Released: ${released}</p>
             <p style="margin-bottom: 0px;">Rating: ${rating}</p>
-            
         </div>
 
-        <div class="col-3 border-top border-bottom">
+        <div class="col-2 border-top border-bottom">
             <p style="margin-bottom: 0px;">Actors:<ul id="actor-list" data-id=${id}> </ul></p>
         </div>
-        <div class="col-2 border-top border-right border-bottom">
-        <div class="blog-box">
-        <button id="edit-film" data-id="${id}" type="button" class="btn btn-outline-danger">Update</button>
-        <button id="delete-film" data-id="${id}" type="button" class="btn btn-outline-warning">Delete</button>
-    </div>
+            <div class="col-2 border-top border-right border-bottom">
+                    <button id="edit-film" data-id="${id}" type="button" class="btn btn-block btn-outline-danger">Update</button>
+                    <button id="delete-film" data-id="${id}" type="button" class="btn btn-block btn-outline-warning">Delete</button>
+            </div>
         </div>
-    </div>
-    <div class="row update-field hide-menu border justify-content-center" data-id="${id}">
-        <div class="col-8">
-            <form id="submit-updated-post" data-id="${id}">
-                <button id = "stop-post" data-id="${id}" type="button" class="btn btn-outline-dark">X</button>
-                <input class="input-fieldE" type="text" data-id="${id}"  id="update-poster" value="${poster}">
-                <input class="input-fieldA" type="text" data-id="${id}"  id="update-title" value="${title}">
-                <input class="input-fieldB" type="text" data-id="${id}"  id="update-released" value="${released}">
-                <input class="input-fieldC" type="text" data-id="${id}"  id="update-director" value="${director}">
-                <input class="input-fieldD" type="text" data-id="${id}"  id="update-rating" value="${rating}">
-                <input type="submit" id="submit-update" data-id="${id}" value="Update Movie">
-            </form>
-        </div>
+    <div class="row update-field hide-menu justify-content-center" data-id="${id}">
+        <form>
+            <div class="form-row justify-content-center">
+                <div class="col-3 border-top border-left border-bottom">
+                    <input class="input-fieldE" type="text" data-id="${id}"  id="update-poster" value="${poster}">
+                </div>
+                <div class="col-3 border-top border-bottom">
+                    <input class="input-fieldA" type="text" data-id="${id}"  id="update-title" value="${title}">
+                    <input class="input-fieldC" type="text" data-id="${id}"  id="update-director" value="${director}">
+                    <input class="input-fieldD" type="text" data-id="${id}"  id="update-rating" value="${rating}">
+                </div>
+                <div class="col-3 border-top border-right border-bottom">
+                    <button id = "stop-post" data-id="${id}" type="button" class="btn btn-sm btn-outline-dark">X</button>
+                    <input type="submit" class="btn btn-info" id="submit-update" data-id="${id}" value="Update Movie">
+                </div>
+            </div>
+        </form>
     </div>
     `
 };
@@ -129,7 +132,11 @@ const displayNewMovie = (title, poster,released, director, rating) => {
                     Your Rating:  
                     <small class="text-muted"> ${rating} Stars</small>
                 </h3>
-            <div>
+            </div>
+            <div class="row justify-content-center">
+                <button id="edit-film" type="button" class="btn btn-outline-danger">Update</button>
+                <button id="delete-film" type="button" class="btn btn-outline-warning">Delete</button>
+            </div>
         </div
     </div>
     `
