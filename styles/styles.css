@@ -7,6 +7,7 @@ div.hide-menu {
 }
 
 .sample-poster {
+    display: block;
     margin-right: auto !important;
     margin-left: auto !important
 }

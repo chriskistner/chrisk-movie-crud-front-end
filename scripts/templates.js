@@ -57,7 +57,7 @@ const newMovie = () => {
                     </div>
                 <div class="row justify-content-center">
                     <div class="col-sm">
-                        <img class="input-fieldE" src="https://via.placeholder.com/150" alt="poster">
+                        <img class="input-fieldE sample-poster" src="https://via.placeholder.com/150" alt="poster">
                     </div>
                 </div>
 
