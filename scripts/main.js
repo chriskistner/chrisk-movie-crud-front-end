@@ -14,14 +14,19 @@ function getMovies() { axios.get(apiURLMovies)
 function populateMovies(arr){
     const appliedTemplates = arr.map(film => create.movieRow(film.id, film.title, film.released, film.director, film.rating, film.poster, film.actors)).join('\n');
     document.querySelector(".main-body").innerHTML = appliedTemplates;
+
+    const starElement = `<img style="margin-top: -3px;" src="http://pngimg.com/uploads/star/star_PNG41472.png" height="20" width="20">`
     
     for (let film of arr){
         const appliedLists = film.actors.map(actor => create.createActorList(actor.first_name, actor.last_name)).join('\n');
         
         if (appliedLists.length === 0) {
             document.querySelector(`#actor-list[data-id="${film.id}"]`).innerHTML = "<li><i>NO ACTORS LISTED</i></li>";
-        } else {document.querySelector(`#actor-list[data-id="${film.id}"]`).innerHTML = appliedLists}
-        
+        } else {document.querySelector(`#actor-list[data-id="${film.id}"]`).innerHTML = appliedLists};
+
+        const starRating = 'Rating: ' + starElement.repeat(film.rating);
+        console.log(starRating);
+        document.querySelector(`#star-rating[data-id="${film.id}"]`).innerHTML = starRating;
 
         // MOVIE ROW MENU BUTTONS
         let deleteFilmButton = document.querySelector(`#delete-film[data-id="${film.id}"]`);
@@ -103,7 +108,7 @@ function populateAddMovie () {
 
 }
 
-let searchForFilm = document.querySelector('#movie-search');
+// let searchForFilm = document.querySelector('#movie-search');
 
 function getMovie(film) {
     axios.get(apiURLMovies + `/${film}`)
@@ -113,15 +118,70 @@ function getMovie(film) {
         })
 }
 
-searchForFilm.addEventListener('submit', function(event){
-    event.preventDefault();
-    let targetMovie = event.target.searchField.value;
-    getMovie(targetMovie);
-    event.target.searchField.value = '';
-})
+// searchForFilm.addEventListener('submit', function(event){
+//     event.preventDefault();
+//     let targetMovie = event.target.searchField.value;
+//     getMovie(targetMovie);
+//     event.target.searchField.value = '';
+// })
+
+// ALL ACTORS PAGE
+
+function getActors() { axios.get(apiURLActors) 
+    .then(function (result) {
+        let stars = result.data;
+        console.log(stars);
+        populateActors(stars);
+    })
+};
+
+function populateActors(arr) {
+    const appliedTemplates = arr.map(star => create.actorRow(star.id, star.first_name, star.last_name)).join('\n');
+    document.querySelector(".main-body").innerHTML = appliedTemplates;
+
+    for (let stars of arr){
+        const appliedLists = stars.films.map(film => create.createMovieList(film.title)).join('\n');
+        
+        if (appliedLists.length === 0) {
+            document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = "<li><i>NO ACTORS LISTED</i></li>";
+        } else {document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = appliedLists}
+    }
+} 
+
+function populateAddActorPage() {
+    document.querySelector(".main-body").innerHTML = create.newActor();
+    axios.get(apiURLMovies)
+    .then(function(result){
+        let titles = result.data;
+        create.populateDropdown(titles);
+    })
+    let addNewActor = document.querySelector('#add-actor');
+    let newActorFName = document.querySelector('#actor-first-name');
+    let newActorLName = document.querySelector('#actor-last-name');
+    // dropdown.size = dropdown.length;
+
+    addNewActor.addEventListener('submit', function (event){
+        event.preventDefault();
+        let movieList = Array.from(document.querySelectorAll('#film-options option:checked')).map(element => element.getAttribute('data-id')).filter(element => element);
+       axios.post(apiURLActors, {
+            first_name: newActorFName.value,
+            last_name: newActorLName.value,
+        })
+        .then(function(result){
+            console.log(result)
+            axios.post(apiURLActors +`/${result.data.id}/movies`, {
+                movies: movieList,
+            })
+        })
+    })
+}
 
 if (window.location.href.endsWith('/index.html')){
     getMovies();
 } else if (window.location.href.endsWith('/add-movie.html')) {
     populateAddMovie();
+} else if (window.location.href.endsWith('/actors.html')) {
+    getActors();
+} else if (window.location.href.endsWith('/add-actor.html')) {
+    populateAddActorPage();
 }

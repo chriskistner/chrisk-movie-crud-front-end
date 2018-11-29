@@ -6,10 +6,10 @@ const movieRow = (id, title, released, director, rating, poster) => {
         </div>
 
         <div class="col-2 border-top border-bottom">
-            <p style="margin-bottom: 0px;">Site ID: ${id}</p>
-            <p style="margin-bottom: 0px;">Title: ${title}</p>
-            <p style="margin-bottom: 0px;">Released: ${released}</p>
-            <p style="margin-bottom: 0px;">Rating: ${rating}</p>
+            <p>Site ID: ${id}</p>
+            <p>Title: ${title}</p>
+            <p>Released: ${released}</p>
+            <p id="star-rating" data-id="${id}"></p>
         </div>
 
         <div class="col-2 border-top border-bottom">
@@ -147,9 +147,86 @@ const displayNewMovie = (title, poster, released, director, rating) => {
     `
 }
 
+
+const actorRow = (id, first_name, last_name) => {
+    return `
+    <div class="row justify-content-center item-rows">
+        <div class="col-3 border-top border-left border-bottom">
+            <p style="margin-bottom: 0px;">Site ID: ${id}</p>
+            <p style="margin-bottom: 0px;">First Name: ${first_name}</p>
+            <p style="margin-bottom: 0px;">Last Name: ${last_name}</p>
+        </div>
+        <div class="col-3 border-top border-bottom">
+            <p style="margin-bottom: 0px;">Films:<ul id="movie-list" data-id=${id}> </ul></p>
+        </div>
+        <div class="col-2 border-top border-right border-bottom">
+            <button id="edit-actor" data-id="${id}" type="button" class="btn btn-block btn-outline-danger">Update</button>
+            <button id="delete-actor" data-id="${id}" type="button" class="btn btn-block btn-outline-warning">Delete</button>
+        </div>
+    </div>
+    `
+}
+
+const createMovieList = (title) => {
+    return `
+    <li>${title}</li>
+    `
+};
+
+function createMovieOption(film){
+    var option = document.createElement("option");
+    option.setAttribute('data-id', film.id)
+    option.innerHTML = film.title;
+    return option;
+};
+
+function populateDropdown(arr){
+    Options = [];
+    for (var i = 0; i < arr.length; i++){
+        Options.push(createMovieOption(arr[i]));
+        document.querySelector("#film-options").appendChild(createMovieOption(arr[i]));    
+    }  
+};
+
+function newActor() {
+    return `
+    <div class="row justify-content-center item-rows">
+        <div class="col-4 border">
+            <div class="form-group">
+                <form id="add-actor">
+                <div class="menuBar">
+                    <label class="menuBar" for="actor-first-name">Actor's First Name</label>
+                </div>
+                    <input type="text" id="actor-first-name">
+                <div class="menuBar">
+                    <label class="menuBar" for="actor-last-name">Actor's Last Name</label>
+                </div>
+                    <input type="text" id="actor-last-name">
+
+                <div class="menuBar">
+                    <label class="menuBar" for="actors-movies">Actor's Movies</label>
+                </div>
+                <select multiple name="film-list" id="film-options">
+                    <option selected disabled>Select Films Here</option>
+                </select>
+                <hr />
+                <input type="submit" id="submission" value="SUBMIT">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    `
+} 
+
 module.exports = {
     movieRow,
     newMovie,
     createActorList,
-    displayNewMovie
+    displayNewMovie,
+    actorRow,
+    createMovieList,
+    createMovieOption,
+    populateDropdown,
+    newActor
 };
