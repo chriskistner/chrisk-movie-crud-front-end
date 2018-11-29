@@ -1,4 +1,4 @@
-const movieRow =(id, title, released, director, rating, poster) => {
+const movieRow = (id, title, released, director, rating, poster) => {
     return `
     <div class="row justify-content-center item-rows">
         <div class="col-2 border-top border-left border-bottom">
@@ -21,7 +21,7 @@ const movieRow =(id, title, released, director, rating, poster) => {
             </div>
         </div>
     <div class="row update-field hide-menu justify-content-center" data-id="${id}">
-        <form>
+        <form class="update-form" data-id="${id}">
             <div class="form-row justify-content-center">
                 <div class="col-3 border-top border-left border-bottom">
                     <input class="input-fieldE" type="text" data-id="${id}"  id="update-poster" value="${poster}">
@@ -95,7 +95,7 @@ const newMovie = () => {
     `
 };
 
-const displayNewMovie = (title, poster,released, director, rating) => {
+const displayNewMovie = (title, poster, released, director, rating) => {
     return `
     <div class="row justify-content-center item-rows">
         <div class="col-4 border">
@@ -134,8 +134,10 @@ const displayNewMovie = (title, poster,released, director, rating) => {
                 </h3>
             </div>
             <div class="row justify-content-center">
-                <button id="edit-film" type="button" class="btn btn-outline-danger">Update</button>
-                <button id="delete-film" type="button" class="btn btn-outline-warning">Delete</button>
+                <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm">All Movies</button>
+                <button type="button" class="btn btn-success btn-sm">Add Another</button>
+          </div>
             </div>
         </div
     </div>

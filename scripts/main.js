@@ -24,8 +24,8 @@ function populateMovies(arr){
         
 
         // MOVIE ROW MENU BUTTONS
-        let deleteBlogButton = document.querySelector(`#delete-film[data-id="${film.id}"]`);
-        let updateBlogButton = document.querySelector(`#edit-film[data-id="${film.id}"]`);
+        let deleteFilmButton = document.querySelector(`#delete-film[data-id="${film.id}"]`);
+        let updateFilmButton = document.querySelector(`#edit-film[data-id="${film.id}"]`);
 
         // UPDATE FIELD AREA
         let closeUpdateButton = document.querySelector(`#stop-post[data-id="${film.id}"]`);
@@ -35,9 +35,9 @@ function populateMovies(arr){
         let updateFieldReleased = document.querySelector(`#update-released[data-id="${film.id}"]`);
         let updateFieldDirector = document.querySelector(`#update-director[data-id="${film.id}"]`);
         let updateFieldRating = document.querySelector(`#update-rating[data-id="${film.id}"]`);
-        let submitUpdate = document.querySelector(`#submit-updated-post[data-id="${film.id}"]`);
+        let submitUpdate = document.querySelector(`.update-form[data-id="${film.id}"]`);
 
-        deleteBlogButton.addEventListener('click', function(){
+        deleteFilmButton.addEventListener('click', function(){
             axios.delete(apiURLMovies+`/${film.id}`)
             .then(function(){
                 console.log("Film Deleted")
@@ -45,7 +45,7 @@ function populateMovies(arr){
             })
         });
 
-        updateBlogButton.addEventListener('click', function() {
+        updateFilmButton.addEventListener('click', function() {
             if(updateField.classList.contains('hide-menu')) {
                 updateField.classList.remove('hide-menu')
             } else {updateField.classList.add('hide-menu')}
