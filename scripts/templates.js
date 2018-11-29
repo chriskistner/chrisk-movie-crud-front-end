@@ -23,17 +23,20 @@ const movieRow = (id, title, released, director, rating, poster) => {
     <div class="row update-field hide-menu justify-content-center" data-id="${id}">
         <form class="update-form" data-id="${id}">
             <div class="form-row justify-content-center">
-                <div class="col-3 border-top border-left border-bottom">
-                    <input class="input-fieldE" type="text" data-id="${id}"  id="update-poster" value="${poster}">
+                <div class="col-2 border-top border-left border-bottom">
+                    <input class="update-form-fields" type="text" data-id="${id}"  id="update-poster" value="${poster}">
                 </div>
-                <div class="col-3 border-top border-bottom">
-                    <input class="input-fieldA" type="text" data-id="${id}"  id="update-title" value="${title}">
-                    <input class="input-fieldC" type="text" data-id="${id}"  id="update-director" value="${director}">
-                    <input class="input-fieldD" type="text" data-id="${id}"  id="update-rating" value="${rating}">
+                <div class="col-2 border-top border-bottom">
+                    <input class="update-form-fields" type="text" data-id="${id}"  id="update-title" value="${title}">
+                    <input class="update-form-fields" type="text" data-id="${id}"  id="update-released" value="${released}">
                 </div>
-                <div class="col-3 border-top border-right border-bottom">
-                    <button id = "stop-post" data-id="${id}" type="button" class="btn btn-sm btn-outline-dark">X</button>
-                    <input type="submit" class="btn btn-info" id="submit-update" data-id="${id}" value="Update Movie">
+                <div class="col-2 border-top border-bottom">
+                <input class="update-form-fields" type="text" data-id="${id}"  id="update-director" value="${director}">
+                <input class="update-form-fields" type="text" data-id="${id}"  id="update-rating" value="${rating}">
+            </div>
+                <div class="col-2 border-top border-right border-bottom">
+                    <button id = "stop-post" data-id="${id}" type="button" class="close-button btn-sm btn-outline-dark">X</button>
+                    <input type="submit" class="update-button btn-info" id="submit-update" data-id="${id}" value="Update Movie">
                 </div>
             </div>
         </form>

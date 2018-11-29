@@ -5,9 +5,28 @@ div.hide-menu {
 .item-rows {
     margin-top: 20px;
 }
+.close-button {
+    float: right;
+    display: block;
+    clear: both !important;
+    margin: 3px;
+}
+
+.update-button {
+    float: right;
+    display: block;
+    clear: both !important;
+    margin: 3px;
+}
+
+.update-form-fields {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 90%;
+}
 
 .sample-poster {
-    display: block;
+    display: block !important;
     margin-right: auto !important;
     margin-left: auto !important
 }
