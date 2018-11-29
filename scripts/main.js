@@ -145,6 +145,18 @@ function populateActors(arr) {
         if (appliedLists.length === 0) {
             document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = "<li><i>NO ACTORS LISTED</i></li>";
         } else {document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = appliedLists}
+
+        let deleteActorButton = document.querySelector(`#delete-actor[data-id="${stars.id}"]`);
+        let updateActorButton = document.querySelector(`#edit-actor[data-id="${stars.id}"]`);
+
+        deleteActorButton.addEventListener('click', function(){
+            axios.delete(apiURLActors+`/${stars.id}`)
+            .then(function(){
+                console.log("Film Deleted")
+                getActors();
+            })
+        });
+
     }
 } 
 
