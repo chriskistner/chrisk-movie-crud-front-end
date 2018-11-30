@@ -210,10 +210,11 @@ function populateActors(arr) {
 //ADD AN ACTOR PAGE
 function populateAddActorPage() {
     document.querySelector(".main-body").innerHTML = create.newActor();
+    let dropDownMenu = document.querySelector('#film-options');
     axios.get(apiURLMovies)
     .then(function(result){
         let titles = result.data;
-        create.populateDropdown(titles);
+        create.populateFullDropdown(titles, dropDownMenu);
     })
     let addNewActor = document.querySelector('#add-actor');
     let newActorFName = document.querySelector('#actor-first-name');

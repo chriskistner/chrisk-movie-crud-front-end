@@ -207,6 +207,12 @@ function createCheckedMovieOption(film ) {
     return option;
 }
 
+function populateFullDropdown(arr, loc){
+    for (var i = 0; i < arr.length; i++){
+        loc.appendChild(createMovieOption(arr[i]));
+    }  
+};
+
 function populateDropdown(arr, checkArr, loc){
     for (var i = 0; i < arr.length; i++){
         if(checkArr.includes(arr[i].title)) {
@@ -258,6 +264,7 @@ module.exports = {
     createMovieList,
     createMovieOption,
     createCheckedMovieOption,
+    populateFullDropdown,
     populateDropdown,
     newActor
 };
