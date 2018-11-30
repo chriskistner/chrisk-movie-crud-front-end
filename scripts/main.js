@@ -161,7 +161,6 @@ function populateActors(arr) {
             updateActorField.classList.add('hide-menu')
         });
         
-
         deleteActorButton.addEventListener('click', function(){
             axios.delete(apiURLActors+`/${stars.id}`)
             .then(function(){
@@ -183,22 +182,28 @@ function populateActors(arr) {
             create.populateDropdown(titles, filmArr, updateActorList);
         });
 
-        submitUpdate.addEventListener('submit', function(result){
-            result.preventDefault();
-            let movieList = Array.from(document.querySelectorAll(`#film-options[data-id="${stars.id}"] option:checked`)).map(element => element.getAttribute('data-id')).filter(element => element);            console.log(movieList);
+        submitUpdate.addEventListener('submit', function(event){
+            event.preventDefault();
+            let movieList = Array.from(document.querySelectorAll(`#film-options[data-id="${stars.id}"] option:checked`)).map(element => element.getAttribute('data-id')).filter(element => element);
             axios.put(apiURLActors+`/${stars.id}`, {
                  first_name: updateActorFName.value,
                  last_name: updateActorLName.value,
              })
              .then(function(result){
-                 axios.post(apiURLActors +`/${result.data.id}/movies`, {
-                     movies: movieList,
+                 return axios.delete(apiURLActors +`/${stars.id}/movies`, {
+                     data: movieList
                  })
+             })
+             .then(function(result){
+                 return axios.post(apiURLActors +  `/${stars.id}/movies`, {
+                     movies: movieList
+                 })
+             })
+             .then(function(){
+                 console.log('Updated');
                  getActors();
-                 updateActorField.classList.add('hide-menu');
              })
         })
-
     }
 } 
 
@@ -223,7 +228,6 @@ function populateAddActorPage() {
             last_name: newActorLName.value,
         })
         .then(function(result){
-            console.log(result)
             axios.post(apiURLActors +`/${result.data.id}/movies`, {
                 movies: movieList,
             })
