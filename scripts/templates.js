@@ -164,6 +164,25 @@ const actorRow = (id, first_name, last_name) => {
             <button id="delete-actor" data-id="${id}" type="button" class="btn btn-block btn-outline-warning">Delete</button>
         </div>
     </div>
+    <div class="row update-actor-field hide-menu justify-content-center" data-id="${id}">
+        <form class="update-form" data-id="${id}">
+            <div class="form-row justify-content-center">
+                <div class="col-4 border-top border-left border-bottom">
+                    <input class="update-form-fields" type="text" data-id="${id}"  id="update-first-name" value="${first_name}">
+                    <input class="update-form-fields" type="text" data-id="${id}"  id="update-last-name" value="${last_name}">
+                </div>
+                <div class="col-4 border-top border-left border-bottom">
+                    <select multiple name="film-list" id="film-options">
+                        <option selected disabled>Select Films Here</option>
+                    </select>
+                </div>
+                <div class="col-4 border-top border-right border-bottom">
+                    <button id = "stop-post" data-id="${id}" type="button" class="close-button btn-sm btn-outline-dark">X</button>
+                    <input type="submit" class="update-button btn-info" id="submit-update" data-id="${id}" value="Update Movie">
+                </div>
+            </div>
+        </form>
+    </div>
     `
 }
 
@@ -175,16 +194,30 @@ const createMovieList = (title) => {
 
 function createMovieOption(film){
     var option = document.createElement("option");
-    option.setAttribute('data-id', film.id)
+    option.setAttribute('data-id', film.id);
     option.innerHTML = film.title;
     return option;
 };
 
-function populateDropdown(arr){
-    Options = [];
+function createCheckedMovieOption(film ) {
+    var option = document.createElement("option");
+    option.setAttribute('data-id', film.id);
+    option.setAttribute('selected', 'selected')
+    option.innerHTML = film.title;
+    console.log(option)
+    return option;
+}
+
+function populateDropdown(arr, checkArr){
     for (var i = 0; i < arr.length; i++){
-        Options.push(createMovieOption(arr[i]));
-        document.querySelector("#film-options").appendChild(createMovieOption(arr[i]));    
+        if(checkArr.includes(arr[i].title)) {
+            document.querySelector("#film-options").appendChild(createCheckedMovieOption(arr[i])); 
+            console.log('true')   
+        } else {
+            document.querySelector("#film-options").appendChild(createMovieOption(arr[i]));
+            console.log('false') 
+        }
+
     }  
 };
 
@@ -227,6 +260,7 @@ module.exports = {
     actorRow,
     createMovieList,
     createMovieOption,
+    createCheckedMovieOption,
     populateDropdown,
     newActor
 };

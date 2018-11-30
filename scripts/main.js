@@ -130,7 +130,6 @@ function getMovie(film) {
 function getActors() { axios.get(apiURLActors) 
     .then(function (result) {
         let stars = result.data;
-        console.log(stars);
         populateActors(stars);
     })
 };
@@ -146,6 +145,7 @@ function populateActors(arr) {
             document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = "<li><i>NO ACTORS LISTED</i></li>";
         } else {document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = appliedLists}
 
+        let updateActorField = document.querySelector(`.update-actor-field[data-id="${stars.id}"]`);
         let deleteActorButton = document.querySelector(`#delete-actor[data-id="${stars.id}"]`);
         let updateActorButton = document.querySelector(`#edit-actor[data-id="${stars.id}"]`);
 
@@ -156,6 +156,19 @@ function populateActors(arr) {
                 getActors();
             })
         });
+
+        updateActorButton.addEventListener('click', function() {
+            if(updateActorField.classList.contains('hide-menu')) {
+                updateActorField.classList.remove('hide-menu')
+            } else {updateActorField.classList.add('hide-menu')}
+        });
+
+        const filmArr = stars.films.map(film => film.title);
+        axios.get(apiURLMovies)
+        .then(function(result){
+            let titles = result.data;
+            create.populateDropdown(titles, filmArr);
+        })
 
     }
 } 
