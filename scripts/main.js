@@ -148,6 +148,8 @@ function populateActors(arr) {
         let updateActorField = document.querySelector(`.update-actor-field[data-id="${stars.id}"]`);
         let deleteActorButton = document.querySelector(`#delete-actor[data-id="${stars.id}"]`);
         let updateActorButton = document.querySelector(`#edit-actor[data-id="${stars.id}"]`);
+        let updateActorList = document.querySelector(`#film-options[data-id="${stars.id}"]`);
+        
 
         deleteActorButton.addEventListener('click', function(){
             axios.delete(apiURLActors+`/${stars.id}`)
@@ -167,9 +169,10 @@ function populateActors(arr) {
         axios.get(apiURLMovies)
         .then(function(result){
             let titles = result.data;
-            create.populateDropdown(titles, filmArr);
+            create.populateDropdown(titles, filmArr, updateActorList);
         })
 
+        
     }
 } 
 

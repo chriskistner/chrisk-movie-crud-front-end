@@ -172,7 +172,7 @@ const actorRow = (id, first_name, last_name) => {
                     <input class="update-form-fields" type="text" data-id="${id}"  id="update-last-name" value="${last_name}">
                 </div>
                 <div class="col-4 border-top border-left border-bottom">
-                    <select multiple name="film-list" id="film-options">
+                    <select multiple name="film-list" id="film-options" data-id="${id}">
                         <option selected disabled>Select Films Here</option>
                     </select>
                 </div>
@@ -208,13 +208,13 @@ function createCheckedMovieOption(film ) {
     return option;
 }
 
-function populateDropdown(arr, checkArr){
+function populateDropdown(arr, checkArr, loc){
     for (var i = 0; i < arr.length; i++){
         if(checkArr.includes(arr[i].title)) {
-            document.querySelector("#film-options").appendChild(createCheckedMovieOption(arr[i])); 
+            loc.appendChild(createCheckedMovieOption(arr[i])); 
             console.log('true')   
         } else {
-            document.querySelector("#film-options").appendChild(createMovieOption(arr[i]));
+            loc.appendChild(createMovieOption(arr[i]));
             console.log('false') 
         }
 
