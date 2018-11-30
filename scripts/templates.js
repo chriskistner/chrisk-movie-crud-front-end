@@ -204,7 +204,6 @@ function createCheckedMovieOption(film ) {
     option.setAttribute('data-id', film.id);
     option.setAttribute('selected', 'selected')
     option.innerHTML = film.title;
-    console.log(option)
     return option;
 }
 
@@ -212,10 +211,8 @@ function populateDropdown(arr, checkArr, loc){
     for (var i = 0; i < arr.length; i++){
         if(checkArr.includes(arr[i].title)) {
             loc.appendChild(createCheckedMovieOption(arr[i])); 
-            console.log('true')   
         } else {
             loc.appendChild(createMovieOption(arr[i]));
-            console.log('false') 
         }
 
     }  

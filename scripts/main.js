@@ -143,12 +143,23 @@ function populateActors(arr) {
         
         if (appliedLists.length === 0) {
             document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = "<li><i>NO ACTORS LISTED</i></li>";
-        } else {document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = appliedLists}
+        } else {document.querySelector(`#movie-list[data-id="${stars.id}"]`).innerHTML = appliedLists};
 
-        let updateActorField = document.querySelector(`.update-actor-field[data-id="${stars.id}"]`);
+        // ACTOR ROW MENU BUTTONS
         let deleteActorButton = document.querySelector(`#delete-actor[data-id="${stars.id}"]`);
         let updateActorButton = document.querySelector(`#edit-actor[data-id="${stars.id}"]`);
+
+        // ACTOR UPDATE MENU FIELDS & BUTTONS
+        let updateActorField = document.querySelector(`.update-actor-field[data-id="${stars.id}"]`);
         let updateActorList = document.querySelector(`#film-options[data-id="${stars.id}"]`);
+        let updateActorFName = document.querySelector(`#update-first-name[data-id="${stars.id}"]`);
+        let updateActorLName = document.querySelector(`#update-last-name[data-id="${stars.id}"]`);
+        let submitUpdate = document.querySelector(`.update-form[data-id="${stars.id}"]`);
+        let closeUpdateButton = document.querySelector(`#stop-post[data-id="${stars.id}"]`);
+
+        closeUpdateButton.addEventListener('click', function(){
+            updateActorField.classList.add('hide-menu')
+        });
         
 
         deleteActorButton.addEventListener('click', function(){
@@ -170,12 +181,28 @@ function populateActors(arr) {
         .then(function(result){
             let titles = result.data;
             create.populateDropdown(titles, filmArr, updateActorList);
+        });
+
+        submitUpdate.addEventListener('submit', function(result){
+            result.preventDefault();
+            let movieList = Array.from(document.querySelectorAll(`#film-options[data-id="${stars.id}"] option:checked`)).map(element => element.getAttribute('data-id')).filter(element => element);            console.log(movieList);
+            axios.put(apiURLActors+`/${stars.id}`, {
+                 first_name: updateActorFName.value,
+                 last_name: updateActorLName.value,
+             })
+             .then(function(result){
+                 axios.post(apiURLActors +`/${result.data.id}/movies`, {
+                     movies: movieList,
+                 })
+                 getActors();
+                 updateActorField.classList.add('hide-menu');
+             })
         })
 
-        
     }
 } 
 
+//ADD AN ACTOR PAGE
 function populateAddActorPage() {
     document.querySelector(".main-body").innerHTML = create.newActor();
     axios.get(apiURLMovies)
