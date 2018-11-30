@@ -6,14 +6,14 @@ const movieRow = (id, title, released, director, rating, poster) => {
         </div>
 
         <div class="col-2 border-top border-bottom">
-            <p>Site ID: ${id}</p>
-            <p>Title: ${title}</p>
-            <p>Released: ${released}</p>
+            <p><b>Site ID:</b> ${id}</p>
+            <p><b>Title:</b> ${title}</p>
+            <p><b>Released:</b> ${released}</p>
             <p id="star-rating" data-id="${id}"></p>
         </div>
 
         <div class="col-2 border-top border-bottom">
-            <p style="margin-bottom: 0px;">Actors:<ul id="actor-list" data-id=${id}> </ul></p>
+            <p style="margin-bottom: 0px;"><b>Actors:</b><ul id="actor-list" data-id=${id}> </ul></p>
         </div>
             <div class="col-2 border-top border-right border-bottom">
                     <button id="edit-film" data-id="${id}" type="button" class="btn btn-block btn-outline-danger">Update</button>
@@ -152,12 +152,12 @@ const actorRow = (id, first_name, last_name) => {
     return `
     <div class="row justify-content-center item-rows">
         <div class="col-3 border-top border-left border-bottom">
-            <p style="margin-bottom: 0px;">Site ID: ${id}</p>
-            <p style="margin-bottom: 0px;">First Name: ${first_name}</p>
-            <p style="margin-bottom: 0px;">Last Name: ${last_name}</p>
+            <p><b>Site ID:</b> ${id}</p>
+            <p><b>First Name:</b> ${first_name}</p>
+            <p><b>Last Name:</b> ${last_name}</p>
         </div>
         <div class="col-3 border-top border-bottom">
-            <p style="margin-bottom: 0px;">Films:<ul id="movie-list" data-id=${id}> </ul></p>
+            <p style="margin-bottom: 0px;"><b>Films:</b><ul id="movie-list" data-id=${id}> </ul></p>
         </div>
         <div class="col-2 border-top border-right border-bottom">
             <button id="edit-actor" data-id="${id}" type="button" class="btn btn-block btn-outline-danger">Update</button>

@@ -24,7 +24,7 @@ function populateMovies(arr){
             document.querySelector(`#actor-list[data-id="${film.id}"]`).innerHTML = "<li><i>NO ACTORS LISTED</i></li>";
         } else {document.querySelector(`#actor-list[data-id="${film.id}"]`).innerHTML = appliedLists};
 
-        const starRating = 'Rating: ' + starElement.repeat(film.rating);
+        const starRating = '<b>Rating:</b> ' + starElement.repeat(film.rating);
         console.log(starRating);
         document.querySelector(`#star-rating[data-id="${film.id}"]`).innerHTML = starRating;
 
