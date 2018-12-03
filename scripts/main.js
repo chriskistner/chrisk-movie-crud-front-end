@@ -25,7 +25,6 @@ function populateMovies(arr){
         } else {document.querySelector(`#actor-list[data-id="${film.id}"]`).innerHTML = appliedLists};
 
         const starRating = '<b>Rating:</b> ' + starElement.repeat(film.rating);
-        console.log(starRating);
         document.querySelector(`#star-rating[data-id="${film.id}"]`).innerHTML = starRating;
 
         // MOVIE ROW MENU BUTTONS
@@ -101,29 +100,11 @@ function populateAddMovie () {
         })
         .then(function(){
             console.log("Success")
-            console.log(newMovieLink.value);
             document.querySelector(".main-body").innerHTML = create.displayNewMovie(newMovieTitle.value, newMovieLink.value, newMovieRelease.value, newMovieDirector.value, newMovieRating.value) 
         })
     })
 
-}
-
-// let searchForFilm = document.querySelector('#movie-search');
-
-function getMovie(film) {
-    axios.get(apiURLMovies + `/${film}`)
-        .then(function (result) {
-            let film = result.data[0];
-            populateMovies([film]);
-        })
-}
-
-// searchForFilm.addEventListener('submit', function(event){
-//     event.preventDefault();
-//     let targetMovie = event.target.searchField.value;
-//     getMovie(targetMovie);
-//     event.target.searchField.value = '';
-// })
+};
 
 // ALL ACTORS PAGE
 
@@ -189,12 +170,12 @@ function populateActors(arr) {
                  first_name: updateActorFName.value,
                  last_name: updateActorLName.value,
              })
-             .then(function(result){
+             .then(function(){
                  return axios.delete(apiURLActors +`/${stars.id}/movies`, {
                      data: movieList
                  })
              })
-             .then(function(result){
+             .then(function(){
                  return axios.post(apiURLActors +  `/${stars.id}/movies`, {
                      movies: movieList
                  })
@@ -205,7 +186,7 @@ function populateActors(arr) {
              })
         })
     }
-} 
+};
 
 //ADD AN ACTOR PAGE
 function populateAddActorPage() {
@@ -219,7 +200,6 @@ function populateAddActorPage() {
     let addNewActor = document.querySelector('#add-actor');
     let newActorFName = document.querySelector('#actor-first-name');
     let newActorLName = document.querySelector('#actor-last-name');
-    // dropdown.size = dropdown.length;
 
     addNewActor.addEventListener('submit', function (event){
         event.preventDefault();
@@ -233,15 +213,58 @@ function populateAddActorPage() {
                 movies: movieList,
             })
         })
+        .then(function(){
+            console.log('Success');
+            document.querySelector(".main-body").innerHTML = create.displayNewActor(newActorFName.value, newActorLName.value, movieList);
+        })
     })
 }
 
+
+//HTML WINDOW SELECTIONS
 if (window.location.href.endsWith('/index.html')){
     getMovies();
+
+    let searchForFilm = document.querySelector('#movie-search');
+    
+    function getMovie(film) {
+    axios.get(apiURLMovies + `/${film}`)
+        .then(function (result) {
+            let film = result.data[0];
+            populateMovies([film]);
+        })
+    };
+    
+    searchForFilm.addEventListener('submit', function(event){
+        event.preventDefault();
+        let targetMovie = event.target.searchField.value;
+        getMovie(targetMovie);
+        event.target.searchField.value = '';
+    });
+
 } else if (window.location.href.endsWith('/add-movie.html')) {
     populateAddMovie();
+
 } else if (window.location.href.endsWith('/actors.html')) {
     getActors();
+    let searchForActor = document.querySelector('#actor-search');
+    
+    function getActor(actor) {
+    axios.get(apiURLActors + `/${actor}`)
+        .then(function (result) {
+            let actor = result.data[0];
+            populateActors([actor]);
+        })
+    };
+    
+    searchForActor.addEventListener('submit', function(event){
+        event.preventDefault();
+        let targetActor = event.target.searchField.value;
+        console.log(targetActor);
+        getActor(targetActor);
+        event.target.searchField.value = '';
+    });
+
 } else if (window.location.href.endsWith('/add-actor.html')) {
     populateAddActorPage();
 }

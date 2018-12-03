@@ -253,7 +253,38 @@ function newActor() {
     </div>
     
     `
-} 
+};
+
+const displayNewActor = (first_name, last_name) => {
+    return `
+    <div class="row justify-content-center item-rows">
+        <div class="col-4 border">
+            <div class="row align-items-center justify-content-center">
+                <h3>
+                    New Actor Information
+                </h3>
+            </div>
+            <div class="row justify-content-center">
+                <h3>
+                    Name: 
+                    <small class="text-muted"> ${first_name} ${last_name}</small>
+                </h3>
+            </div>
+            <div class="row justify-content-center">
+                <p>
+                    <i>See Actor List for Assigned Films</i>
+                </p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="btn-group">
+                <a href="./actors.html"><button type="button" class="btn btn-primary btn-sm">All Actors</button></a>
+                <a href="./add-actor.html"><button type="button" class="btn btn-success btn-sm">Add Another</button></a>
+          </div>
+            </div>
+        </div
+    </div>
+    `
+}
 
 module.exports = {
     movieRow,
@@ -266,5 +297,6 @@ module.exports = {
     createCheckedMovieOption,
     populateFullDropdown,
     populateDropdown,
-    newActor
+    newActor,
+    displayNewActor,
 };
