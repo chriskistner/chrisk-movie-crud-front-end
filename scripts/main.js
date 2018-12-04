@@ -218,11 +218,13 @@ function populateAddActorPage() {
             document.querySelector(".main-body").innerHTML = create.displayNewActor(newActorFName.value, newActorLName.value, movieList);
         })
     })
-}
+};
+
+
 
 
 //HTML WINDOW SELECTIONS
-if (window.location.href.endsWith('/index.html')){
+if (window.location.href.endsWith('/movies.html')){
     getMovies();
 
     let searchForFilm = document.querySelector('#movie-search');
@@ -267,4 +269,8 @@ if (window.location.href.endsWith('/index.html')){
 
 } else if (window.location.href.endsWith('/add-actor.html')) {
     populateAddActorPage();
+
+} else if (window.location.href.endsWith('/index.html')) {
+    const homePageTemplate = create.displayHomePageMenu();
+    document.querySelector(".main-body").innerHTML = homePageTemplate;
 }

@@ -30,3 +30,13 @@ div.hide-menu {
     margin-right: auto !important;
     margin-left: auto !important
 }
+
+.home-page-pics {
+    display: block !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 300px;
+    max-height: 200px;
+}
