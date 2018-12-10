@@ -2,7 +2,7 @@ const movieRow = (id, title, released, director, rating, poster) => {
     return `
     <div class="row justify-content-center item-rows">
         <div class="col-2 border-top border-left border-bottom border-success item-columns">
-            <img src="${poster}" height="200px">
+            <img src="${poster}" height="200px" width="135px">
         </div>
 
         <div class="col-2 border-top border-bottom border-success item-columns">
@@ -138,7 +138,7 @@ const displayNewMovie = (title, poster, released, director, rating) => {
             </div>
             <div class="row justify-content-center">
                 <div class="btn-group">
-                <a href="./index.html"><button type="button" class="btn btn-primary btn-sm">All Movies</button></a>
+                <a href="./index.movies"><button type="button" class="btn btn-primary btn-sm">All Movies</button></a>
                 <a href="./add-movie.html"><button type="button" class="btn btn-success btn-sm">Add Another</button></a>
           </div>
             </div>

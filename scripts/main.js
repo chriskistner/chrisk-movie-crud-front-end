@@ -1,5 +1,5 @@
-const apiURLMovies = "http://localhost:3000/movies";
-const apiURLActors = "http://localhost:3000/actors";
+const apiURLMovies = "https://chrisk-movie-crud.herokuapp.com/movies";
+const apiURLActors = "https://chrisk-movie-crud.herokuapp.com/actors";
 const axios = require('axios');
 const create = require('./templates');
 
