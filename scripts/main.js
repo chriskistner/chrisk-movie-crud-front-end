@@ -270,7 +270,7 @@ if (window.location.href.endsWith('/movies.html')){
 } else if (window.location.href.endsWith('/add-actor.html')) {
     populateAddActorPage();
 
-} else {
+} else if (window.location.href === `http://chrisk-moviecrud.surge.sh/`) {
     const homePageTemplate = create.displayHomePageMenu();
     document.querySelector(".main-body").innerHTML = homePageTemplate;
 }
